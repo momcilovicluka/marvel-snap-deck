@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="marvelSnapDeckJPA" transaction-type="RESOURCE_LOCAL">
+		<class>model.Deck</class>
+		<class>model.Karta</class>
+		<class>model.Kartadecka</class>
+		<class>model.Kategorija</class>
+		<class>model.Komentar</class>
+		<class>model.Korisnik</class>
+		<class>model.Omiljeni</class>
+		<class>model.Poruka</class>
+		<class>model.Prijatelji</class>
+		<class>model.Tip</class>
+		<class>model.Userrole</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/marvelsnapdeck"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
