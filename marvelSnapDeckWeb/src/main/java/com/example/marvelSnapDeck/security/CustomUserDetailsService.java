@@ -1,31 +1,31 @@
-/*
- * package com.example.marvelSnapDeck.security;
- * 
- * import java.util.Set;
- * 
- * import org.springframework.beans.factory.annotation.Autowired; import
- * org.springframework.security.core.userdetails.UserDetails; import
- * org.springframework.security.core.userdetails.UserDetailsService; import
- * org.springframework.security.core.userdetails.UsernameNotFoundException;
- * import org.springframework.stereotype.Service;
- * 
- * import com.example.marvelSnapDeck.repositories.KorisnikRepository;
- * 
- * import model.Korisnik;
- * 
- * @Service("customUserDetailsService") public class CustomUserDetailsService
- * implements UserDetailsService {
- * 
- * @Autowired private KorisnikRepository korisnikRepository;
- * 
- * @Override public UserDetails loadUserByUsername(String username) throws
- * UsernameNotFoundException { Korisnik user =
- * korisnikRepository.findByUsername(username); UserDetailsImpl userDetails =
- * new UserDetailsImpl(); userDetails.setUsername(user.getUsername());
- * userDetails.setPassword(user.getPassword());
- * userDetails.setRoles(Set.of(user.getUserrole())); return userDetails;
- * 
- * }
- * 
- * }
- */
+
+  package com.example.marvelSnapDeck.security;
+  
+  import java.util.Set;
+  
+  import org.springframework.beans.factory.annotation.Autowired; import
+  org.springframework.security.core.userdetails.UserDetails; import
+  org.springframework.security.core.userdetails.UserDetailsService; import
+  org.springframework.security.core.userdetails.UsernameNotFoundException;
+  import org.springframework.stereotype.Service;
+  
+  import com.example.marvelSnapDeck.repositories.KorisnikRepository;
+  
+  import model.Korisnik;
+  
+  @Service("customUserDetailsService") public class CustomUserDetailsService
+  implements UserDetailsService {
+  
+  @Autowired private KorisnikRepository korisnikRepository;
+  
+  @Override public UserDetails loadUserByUsername(String username) throws
+  UsernameNotFoundException { Korisnik user =
+  korisnikRepository.findByUsername(username); UserDetailsImpl userDetails =
+  new UserDetailsImpl(); userDetails.setUsername(user.getUsername());
+  userDetails.setPassword(user.getPassword());
+  userDetails.setRoles(Set.of(user.getUserrole())); return userDetails;
+  
+  }
+  
+  }
+ 
