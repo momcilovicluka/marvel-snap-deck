@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<sf:form modelAttribute="user" action="register" method="post">
+	<sf:form modelAttribute="user" action="registerAdmin" method="post">
 		<table>
 			<tr>
 				<td>Ime:</td>

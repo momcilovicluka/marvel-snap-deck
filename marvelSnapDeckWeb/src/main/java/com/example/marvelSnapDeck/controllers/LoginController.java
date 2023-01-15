@@ -50,7 +50,7 @@ public class LoginController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		u.setPassword(passwordEncoder.encode(u.getPassword()));
 
-		Userrole role = rr.findById(u.getUserrole().getIdUserRole()).get();
+		Userrole role = rr.findByNaziv("Korisnik");
 
 		u.setUserrole(role);
 		role.addKorisnik(u);
@@ -58,5 +58,27 @@ public class LoginController {
 		kr.save(u);
 		System.out.println("SAVED");
 		return "login";
+	}
+	
+	@GetMapping("getEmptyAdmin")
+	public String newAdmin(Model model) {
+		Korisnik u = new Korisnik();
+		model.addAttribute("user", u);
+		return "admin/dodajAdmina";
+	}
+
+	@PostMapping("registerAdmin")
+	public String saveAdmin(@ModelAttribute("user") Korisnik u) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		u.setPassword(passwordEncoder.encode(u.getPassword()));
+
+		Userrole role = rr.findByNaziv("Admin");
+
+		u.setUserrole(role);
+		role.addKorisnik(u);
+
+		kr.save(u);
+		System.out.println("SAVED");
+		return "index";
 	}
 }

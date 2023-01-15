@@ -2,29 +2,32 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<sf:form modelAttribute="user" action="register" method="post">
+	<sf:form modelAttribute="KartaImage" action="dodajKartu" method="post"
+		enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td>Ime:</td>
-				<td><sf:input path="ime" /></td>
+				<td>Naziv:</td>
+				<td><sf:input path="naziv" /></td>
 			</tr>
 			<tr>
-				<td>Prezime:</td>
-				<td><sf:input path="prezime" /></td>
+				<td>Opis:</td>
+				<td><sf:input path="opis" /></td>
 			</tr>
 			<tr>
-				<td>Korisnicko ime:</td>
-				<td><sf:input path="username" /></td>
+				<td>Tip</td>
+				<td><sf:select path="tip" items="${tipovi}" itemValue="idTip"
+						itemLabel="tip" /></td>
 			</tr>
 			<tr>
-				<td>Sifra:</td>
-				<td><sf:password path="password" /></td>
+				<td>Slika:</td>
+				<td><sf:input type="file" path="slika" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Sacuvaj"></td>
