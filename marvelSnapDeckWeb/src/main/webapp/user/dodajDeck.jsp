@@ -6,29 +6,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Dodaj kartu</title>
+<title>Dodaj Deck</title>
 </head>
 <body>
-	<sf:form modelAttribute="KartaImage" action="dodajKartu" method="post"
-		enctype="multipart/form-data">
+	<sf:form modelAttribute="Deck" action="dodajDeck" method="post">
 		<table>
 			<tr>
 				<td>Naziv:</td>
-				<td><sf:input path="naziv" required /></td>
+				<td><sf:input path="naziv" /></td>
 			</tr>
 			<tr>
 				<td>Opis:</td>
-				<td><sf:input path="opis" required /></td>
+				<td><sf:input path="opis" /></td>
 			</tr>
 			<tr>
-				<td>Tip</td>
-				<td><sf:select path="tip" items="${tipovi}" itemValue="idTip"
-						itemLabel="tip" /></td>
-			</tr>
-			<tr>
-				<td>Slika:</td>
-				<td><sf:input type="file" path="slika"
-						accept="image/png, image/jpeg, image/gif" required /></td>
+				<td>Kategorija</td>
+				<td><sf:select path="kategorija" items="${kategorije}" itemValue="idKategorija"
+						itemLabel="naziv" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Sacuvaj"></td>

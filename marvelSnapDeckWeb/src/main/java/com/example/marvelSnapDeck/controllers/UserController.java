@@ -15,10 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.marvelSnapDeck.domain.KartaImage;
+import com.example.marvelSnapDeck.repositories.DeckRepository;
 import com.example.marvelSnapDeck.repositories.KartaRepository;
+import com.example.marvelSnapDeck.repositories.KartadeckaRepository;
+import com.example.marvelSnapDeck.repositories.KategorijaRepository;
 import com.example.marvelSnapDeck.repositories.TipRepository;
 
+import model.Deck;
 import model.Karta;
+import model.Kartadecka;
+import model.Kategorija;
 import model.Tip;
 
 @Controller
@@ -30,6 +36,15 @@ public class UserController {
 
 	@Autowired
 	KartaRepository kr;
+
+	@Autowired
+	DeckRepository dr;
+
+	@Autowired
+	KategorijaRepository kar;
+
+	@Autowired
+	KartadeckaRepository kdr;
 
 	@ModelAttribute
 	public void getTips(Model model) {
@@ -63,6 +78,65 @@ public class UserController {
 
 		kr.save(k);
 		System.out.println("SAVED Karta");
+		return "index";
+	}
+
+	@ModelAttribute
+	public void getKategorije(Model model) {
+		List<Kategorija> kategorije = kar.findAll();
+		model.addAttribute("kategorije", kategorije);
+	}
+
+	@GetMapping("vratiPrazanDeck")
+	public String prazanDeck(Model model) {
+		Deck d = new Deck();
+		model.addAttribute("Deck", d);
+		return "user/dodajDeck";
+	}
+
+	@PostMapping("dodajDeck")
+	public String dodajDeck(@ModelAttribute("Deck") Deck d) {
+		dr.save(d);
+		System.out.println("SAVED Deck");
+		return "index";
+	}
+
+	@ModelAttribute
+	public void getDeckovi(Model model) {
+		List<Deck> deckovi = dr.findAll();
+		model.addAttribute("deckovi", deckovi);
+	}
+
+	@ModelAttribute
+	public void getKarte(Model model) {
+		List<Karta> karte = kr.findAll();
+		model.addAttribute("karte", karte);
+	}
+
+	@GetMapping("vratiPraznuKartadecka")
+	public String praznaKartadecka(Model model) {
+		Kartadecka kd = new Kartadecka();
+		model.addAttribute("Kartadecka", kd);
+		return "user/dodajKartuUDeck";
+	}
+
+	@PostMapping("dodajKartuUDeck")
+	public String dodajKartuUDeck(@ModelAttribute("Kartadecka") Kartadecka kd) {
+		String message = "";
+
+		List<Kartadecka> kartedecka = kdr.findByDeck(kd.getDeck());
+		int n = kartedecka.size();
+		if (n > 11)
+			message += "Deck je pun";
+
+		if (kartedecka.parallelStream().filter(k -> k.getKarta().equals(kd.getKarta())).count() > 0)
+			message += " Karta je vec u decku";
+		System.out.println(message);
+		if (!message.isEmpty())
+			return "user/dodajKartuUDeck";
+
+		kdr.save(kd);
+		System.out.println("SAVED Kartadecka");
 		return "index";
 	}
 }

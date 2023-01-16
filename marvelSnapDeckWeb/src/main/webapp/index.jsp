@@ -11,7 +11,9 @@
 </head>
 <body>
 	<h1>Dobrodosli na portal Marvel Snap Deck</h1>
-	<a href="/Pozoriste/PretragaPredstava.jsp">Pretraga karata</a>
+	<a href="/marvelSnapDeck/auth/sveKarte">Pretraga karata</a>
+	<br />
+	<a href="/marvelSnapDeck/auth/loginPage">Log out</a>
 	<br />
 	<security:authorize access="hasRole('Admin')">
 		<a href="/marvelSnapDeck/admin/vratiPrazanTip">Dodaj tip</a>
@@ -24,6 +26,11 @@
 	</security:authorize>
 	<security:authorize access="hasRole('Korisnik')">
 		<a href="/marvelSnapDeck/user/vratiPraznuKartu">Dodaj kartu</a>
+		<br />
+		<a href="/marvelSnapDeck/user/vratiPrazanDeck">Dodaj deck</a>
+		<br />
+		<a href="/marvelSnapDeck/user/vratiPraznuKartadecka">Dodaj kartu u
+			deck</a>
 		<br />
 	</security:authorize>
 </body>

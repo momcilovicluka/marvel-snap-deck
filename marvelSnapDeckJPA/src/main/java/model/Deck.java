@@ -18,6 +18,8 @@ public class Deck implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idDeck;
 
+	private String naziv;
+
 	private String opis;
 
 	//bi-directional many-to-one association to Kategorija
@@ -46,6 +48,14 @@ public class Deck implements Serializable {
 
 	public void setIdDeck(int idDeck) {
 		this.idDeck = idDeck;
+	}
+
+	public String getNaziv() {
+		return this.naziv;
+	}
+
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
 	}
 
 	public String getOpis() {

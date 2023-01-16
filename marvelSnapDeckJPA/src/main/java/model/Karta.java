@@ -25,6 +25,8 @@ public class Karta implements Serializable {
 	@Lob
 	private byte[] slika;
 
+	private String slika64;
+
 	//bi-directional many-to-one association to Tip
 	@ManyToOne
 	@JoinColumn(name="idTip")
@@ -67,6 +69,14 @@ public class Karta implements Serializable {
 
 	public void setSlika(byte[] slika) {
 		this.slika = slika;
+	}
+
+	public String getSlika64() {
+		return this.slika64;
+	}
+
+	public void setSlika64(String slika64) {
+		this.slika64 = slika64;
 	}
 
 	public Tip getTip() {
