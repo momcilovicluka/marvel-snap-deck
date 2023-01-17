@@ -2,9 +2,14 @@ package com.example.marvelSnapDeck.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,16 +20,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.marvelSnapDeck.domain.KartaImage;
+import com.example.marvelSnapDeck.domain.KomentarInt;
 import com.example.marvelSnapDeck.repositories.DeckRepository;
 import com.example.marvelSnapDeck.repositories.KartaRepository;
 import com.example.marvelSnapDeck.repositories.KartadeckaRepository;
 import com.example.marvelSnapDeck.repositories.KategorijaRepository;
+import com.example.marvelSnapDeck.repositories.KomentarRepository;
+import com.example.marvelSnapDeck.repositories.KorisnikRepository;
 import com.example.marvelSnapDeck.repositories.TipRepository;
 
 import model.Deck;
 import model.Karta;
 import model.Kartadecka;
 import model.Kategorija;
+import model.Komentar;
+import model.Korisnik;
 import model.Tip;
 
 @Controller
@@ -46,10 +56,24 @@ public class UserController {
 	@Autowired
 	KartadeckaRepository kdr;
 
+	@Autowired
+	KorisnikRepository kor;
+
+	@Autowired
+	KomentarRepository komr;
+
 	@ModelAttribute
 	public void getTips(Model model) {
 		List<Tip> tipovi = tr.findAll();
 		model.addAttribute("tipovi", tipovi);
+	}
+
+	public static void spremiSlike(List<Karta> karte) throws UnsupportedEncodingException {
+		for (Karta karta : karte) {
+			byte[] encodeBase64 = Base64.encodeBase64(karta.getSlika());
+			String base64Encoded = new String(encodeBase64, "UTF-8");
+			karta.setSlika64(base64Encoded);
+		}
 	}
 
 	@GetMapping("vratiPraznuKartu")
@@ -138,5 +162,39 @@ public class UserController {
 		kdr.save(kd);
 		System.out.println("SAVED Kartadecka");
 		return "index";
+	}
+
+	@GetMapping("sviDeckovi")
+	public String getSviDeckovi(Model model) {
+		return "user/sviDeckovi";
+	}
+
+	@GetMapping("vratiDeck")
+	public String getInfoODecku(Model model, HttpServletRequest request, Principal p)
+			throws UnsupportedEncodingException {
+		Deck deck = dr.findById(Integer.parseInt(request.getParameter("idDeck"))).get();
+		List<Karta> karte = kdr.findKarteByDeckId(deck.getIdDeck());
+		spremiSlike(karte);
+		model.addAttribute("karte", karte);
+		model.addAttribute("deck", deck);
+		KomentarInt k = new KomentarInt();
+		model.addAttribute("komentar", k);
+		Korisnik korisnik = kor.findByUsername(p.getName());
+		model.addAttribute("korisnik", korisnik);
+		return "user/deckInfo";
+	}
+
+	@PostMapping("dodajKomentar")
+	public String dodajKomentar(@ModelAttribute KomentarInt ki, Model model, HttpServletRequest request, Principal p)
+			throws UnsupportedEncodingException {
+		Komentar k = new Komentar();
+		k.setKomentar(ki.getKomentar());
+		k.setKorisnik(kor.findById(Integer.parseInt(ki.getIdKorisnik())).get());
+		k.setDeck(dr.findById(Integer.parseInt(ki.getIdDeck())).get());
+		System.out
+				.println(k.getIdKomentar() + k.getKomentar() + k.getDeck().getNaziv() + k.getKorisnik().getUsername());
+		komr.save(k);
+		return getInfoODecku(model, request, p);
+
 	}
 }

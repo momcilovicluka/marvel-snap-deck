@@ -15,7 +15,9 @@ public class Komentar implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int komentarId;
+	private int idKomentar;
+
+	private String komentar;
 
 	//bi-directional many-to-one association to Deck
 	@ManyToOne
@@ -28,12 +30,20 @@ public class Komentar implements Serializable {
 	public Komentar() {
 	}
 
-	public int getKomentarId() {
-		return this.komentarId;
+	public int getIdKomentar() {
+		return this.idKomentar;
 	}
 
-	public void setKomentarId(int komentarId) {
-		this.komentarId = komentarId;
+	public void setIdKomentar(int idKomentar) {
+		this.idKomentar = idKomentar;
+	}
+
+	public String getKomentar() {
+		return this.komentar;
+	}
+
+	public void setKomentar(String komentar) {
+		this.komentar = komentar;
 	}
 
 	public Deck getDeck() {

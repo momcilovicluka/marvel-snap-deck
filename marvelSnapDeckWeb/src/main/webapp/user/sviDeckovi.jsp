@@ -7,26 +7,23 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>Karte</title>
+<title>Deckovi</title>
 </head>
 <body>
-	<c:if test="${!empty karte}">
+	<c:if test="${!empty deckovi}">
 		<table border="1">
 			<tr>
 				<th>ID</th>
 				<th>Naziv</th>
 				<th>Opis</th>
-				<th>Tip</th>
-				<th>Slika</th>
+				<th>Kategorija</th>
 			</tr>
-			<c:forEach items="${karte }" var="k">
+			<c:forEach items="${deckovi }" var="d">
 				<tr>
-					<td>${k.idKarta }</td>
-					<td>${k.naziv }</td>
-					<td>${k.opis }</td>
-					<td>${k.tip.tip }</td>
-					<td><img src="data:image/png;base64,${k.slika64 }" width="190"
-						height="265" /></td>
+					<td>${d.idDeck }</td>
+					<td>${d.naziv }</td>
+					<td>${d.opis }</td>
+					<td><a href="/marvelSnapDeck/user/vratiDeck?idDeck=${d.idDeck }">Detalji</a></td>
 				</tr>
 			</c:forEach>
 		</table>

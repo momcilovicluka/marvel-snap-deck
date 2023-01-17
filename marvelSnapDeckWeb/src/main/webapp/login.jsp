@@ -5,8 +5,10 @@
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <html>
-
-
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Log in</title>
+</head>
 <body>
 	<a href="/marvelSnapDeck/auth/sveKarte">Pretraga karata</a>
 	<br>

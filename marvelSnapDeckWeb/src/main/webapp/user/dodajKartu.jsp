@@ -27,8 +27,8 @@
 			</tr>
 			<tr>
 				<td>Slika:</td>
-				<td><sf:input type="file" path="slika"
-						accept="image/png, image/jpeg, image/gif" required /></td>
+				<td><sf:input type="file" path="slika" accept="image/png"
+						required /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Sacuvaj"></td>

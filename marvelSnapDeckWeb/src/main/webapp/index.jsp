@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Marvel Snap Deck</title>
 </head>
 <body>
 	<h1>Dobrodosli na portal Marvel Snap Deck</h1>
@@ -31,6 +31,8 @@
 		<br />
 		<a href="/marvelSnapDeck/user/vratiPraznuKartadecka">Dodaj kartu u
 			deck</a>
+		<br />
+		<a href="/marvelSnapDeck/user/sviDeckovi">Svi deckovi</a>
 		<br />
 	</security:authorize>
 </body>
