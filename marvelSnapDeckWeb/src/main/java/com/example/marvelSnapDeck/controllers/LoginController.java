@@ -43,6 +43,11 @@ public class LoginController {
 		return "login";
 	}
 
+	@GetMapping("index")
+	public String index() {
+		return "index";
+	}
+
 	@ModelAttribute
 	public void getRoles(Model model) {
 		List<Userrole> roles = rr.findAll();

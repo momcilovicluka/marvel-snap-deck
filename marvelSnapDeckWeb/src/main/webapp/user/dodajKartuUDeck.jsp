@@ -15,12 +15,12 @@
 			<tr>
 				<td>Deck</td>
 				<td><sf:select path="deck" items="${deckovi}"
-						itemValue="idDeck" itemLabel="naziv" /></td>
+						itemValue="idDeck" itemLabel="naziv" required="true" /></td>
 			</tr>
 			<tr>
 				<td>Karta</td>
 				<td><sf:select path="karta" items="${karte}"
-						itemValue="idKarta" itemLabel="naziv" /></td>
+						itemValue="idKarta" itemLabel="naziv" required="true" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Sacuvaj"></td>

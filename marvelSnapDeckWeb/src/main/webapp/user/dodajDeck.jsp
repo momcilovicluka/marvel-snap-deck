@@ -13,16 +13,16 @@
 		<table>
 			<tr>
 				<td>Naziv:</td>
-				<td><sf:input path="naziv" /></td>
+				<td><sf:input path="naziv" required="true" /></td>
 			</tr>
 			<tr>
 				<td>Opis:</td>
-				<td><sf:input path="opis" /></td>
+				<td><sf:input path="opis" required="true" /></td>
 			</tr>
 			<tr>
 				<td>Kategorija</td>
 				<td><sf:select path="kategorija" items="${kategorije}" itemValue="idKategorija"
-						itemLabel="naziv" /></td>
+						itemLabel="naziv" required="true" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Sacuvaj"></td>

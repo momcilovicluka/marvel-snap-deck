@@ -22,12 +22,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Korisnik user = korisnikRepository.findByUsername(username);
-		UserDetailsImpl userDetails = new UserDetailsImpl();
-		userDetails.setUsername(user.getUsername());
-		userDetails.setPassword(user.getPassword());
-		userDetails.setRoles(Set.of(user.getUserrole()));
+		CustomUserDetails userDetails = new CustomUserDetails(user);
 		return userDetails;
-
 	}
 
 }

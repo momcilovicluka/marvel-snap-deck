@@ -6,34 +6,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/style.css" />
+<meta charset="UTF-8" />
 <title>Marvel Snap Deck</title>
 </head>
-<body>
-	<h1>Dobrodosli na portal Marvel Snap Deck</h1>
-	<a href="/marvelSnapDeck/auth/sveKarte">Pretraga karata</a>
-	<br />
-	<a href="/marvelSnapDeck/auth/loginPage">Log out</a>
-	<br />
-	<security:authorize access="hasRole('Admin')">
-		<a href="/marvelSnapDeck/admin/vratiPrazanTip">Dodaj tip</a>
-		<br />
-		<a href="/marvelSnapDeck/admin/vratiPraznuKategoriju">Dodaj
-			kategoriju</a>
-		<br />
-		<a href="/marvelSnapDeck/auth/getEmptyAdmin">Dodaj admina</a>
-		<br />
-	</security:authorize>
-	<security:authorize access="hasRole('Korisnik')">
-		<a href="/marvelSnapDeck/user/vratiPraznuKartu">Dodaj kartu</a>
-		<br />
-		<a href="/marvelSnapDeck/user/vratiPrazanDeck">Dodaj deck</a>
-		<br />
-		<a href="/marvelSnapDeck/user/vratiPraznuKartadecka">Dodaj kartu u
-			deck</a>
-		<br />
-		<a href="/marvelSnapDeck/user/sviDeckovi">Svi deckovi</a>
-		<br />
-	</security:authorize>
+<body style="background-image: url('images/background.jpg')">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h1 class="heading-section"
+						style="color: white; font-size: 60px; transform: translateY(-25%)">
+						Marvel Snap Deck</h1>
+				</div>
+			</div>
+			<div class="row justify-content-center"
+				style="transform: translateY(40%)">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+						<div class="social d-flex text-center">
+							<a href="/marvelSnapDeck/auth/loginPage"
+								class="px-2 py-2 mr-md-1 rounded">Log In</a>
+						</div>
+						<br />
+						<div class="social d-flex text-center">
+							<a href="/marvelSnapDeck/auth/sveKarte"
+								class="px-2 py-2 mr-md-1 rounded">Pregled
+								Karata</a>
+						</div>
+						<br />
+						<security:authorize access="hasRole('ADMIN')">
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/admin/vratiPrazanTip">Dodaj tip</a>
+							</div>
+							<br />
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/admin/vratiPraznuKategoriju">Dodaj
+									kategoriju</a>
+							</div>
+							<br />
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/auth/getEmptyAdmin">Dodaj admina</a>
+							</div>
+							<br />
+						</security:authorize>
+						<security:authorize access="hasRole('KORISNIK')">
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/user/vratiPraznuKartu">Dodaj
+									kartu</a>
+							</div>
+							<br />
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/user/vratiPrazanDeck">Dodaj deck</a>
+							</div>
+							<br />
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/user/vratiPraznuKartadecka">Dodaj
+									kartu u deck</a>
+							</div>
+							<br />
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/user/sviDeckovi">Svi deckovi</a>
+							</div>
+							<br />
+						</security:authorize>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 </html>

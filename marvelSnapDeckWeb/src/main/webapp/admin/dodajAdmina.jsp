@@ -12,19 +12,19 @@
 		<table>
 			<tr>
 				<td>Ime:</td>
-				<td><sf:input path="ime" /></td>
+				<td><sf:input path="ime" required="true" /></td>
 			</tr>
 			<tr>
 				<td>Prezime:</td>
-				<td><sf:input path="prezime" /></td>
+				<td><sf:input path="prezime" required="true" /></td>
 			</tr>
 			<tr>
 				<td>Korisnicko ime:</td>
-				<td><sf:input path="username" /></td>
+				<td><sf:input path="username" required="true" /></td>
 			</tr>
 			<tr>
 				<td>Sifra:</td>
-				<td><sf:password path="password" /></td>
+				<td><sf:password path="password" required="true" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Sacuvaj"></td>

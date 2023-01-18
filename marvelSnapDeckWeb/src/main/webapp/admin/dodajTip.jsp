@@ -15,7 +15,7 @@
 		<table>
 			<tr>
 				<td>Tip:</td>
-				<td><sf:input path="tip" /></td>
+				<td><sf:input path="tip" required="true" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Sacuvaj"></td>

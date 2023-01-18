@@ -191,10 +191,7 @@ public class UserController {
 		k.setKomentar(ki.getKomentar());
 		k.setKorisnik(kor.findById(Integer.parseInt(ki.getIdKorisnik())).get());
 		k.setDeck(dr.findById(Integer.parseInt(ki.getIdDeck())).get());
-		System.out
-				.println(k.getIdKomentar() + k.getKomentar() + k.getDeck().getNaziv() + k.getKorisnik().getUsername());
 		komr.save(k);
 		return getInfoODecku(model, request, p);
-
 	}
 }

@@ -16,7 +16,7 @@
 		<table>
 			<tr>
 				<td>Kategorija:</td>
-				<td><sf:input path="naziv" /></td>
+				<td><sf:input path="naziv" required="true" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Sacuvaj"></td>
