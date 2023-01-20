@@ -26,6 +26,10 @@ public class Korisnik implements Serializable {
 
 	private String username;
 
+	//bi-directional many-to-one association to Deck
+	@OneToMany(mappedBy="korisnik")
+	private List<Deck> decks;
+
 	//bi-directional many-to-one association to Komentar
 	@OneToMany(mappedBy="korisnik")
 	private List<Komentar> komentars;
@@ -88,6 +92,28 @@ public class Korisnik implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public List<Deck> getDecks() {
+		return this.decks;
+	}
+
+	public void setDecks(List<Deck> decks) {
+		this.decks = decks;
+	}
+
+	public Deck addDeck(Deck deck) {
+		getDecks().add(deck);
+		deck.setKorisnik(this);
+
+		return deck;
+	}
+
+	public Deck removeDeck(Deck deck) {
+		getDecks().remove(deck);
+		deck.setKorisnik(null);
+
+		return deck;
 	}
 
 	public List<Komentar> getKomentars() {

@@ -1,0 +1,3 @@
+[{"idDeck":1, "Naziv":"Dobar deck", "Opis":"Bas je onako dobar kao Dalibor", "idKategorija":1, "datum":"2023-01-19", "vlasnik":3},
+ {"idDeck":2, "Naziv":"Jovan Miric", "Opis":"Nebojsa bald", "idKategorija":1, "datum":"2023-01-19", "vlasnik":3},
+ {"idDeck":3, "Naziv":"asdf", "Opis":"asd", "idKategorija":6, "datum":"2023-01-19", "vlasnik":3}]

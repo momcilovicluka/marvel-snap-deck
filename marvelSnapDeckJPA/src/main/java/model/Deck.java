@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,6 +19,9 @@ public class Deck implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idDeck;
 
+	@Temporal(TemporalType.DATE)
+	private Date datum;
+
 	private String naziv;
 
 	private String opis;
@@ -26,6 +30,11 @@ public class Deck implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idKategorija")
 	private Kategorija kategorija;
+
+	//bi-directional many-to-one association to Korisnik
+	@ManyToOne
+	@JoinColumn(name="vlasnik")
+	private Korisnik korisnik;
 
 	//bi-directional many-to-one association to Kartadecka
 	@OneToMany(mappedBy="deck")
@@ -50,6 +59,14 @@ public class Deck implements Serializable {
 		this.idDeck = idDeck;
 	}
 
+	public Date getDatum() {
+		return this.datum;
+	}
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
+	}
+
 	public String getNaziv() {
 		return this.naziv;
 	}
@@ -72,6 +89,14 @@ public class Deck implements Serializable {
 
 	public void setKategorija(Kategorija kategorija) {
 		this.kategorija = kategorija;
+	}
+
+	public Korisnik getKorisnik() {
+		return this.korisnik;
+	}
+
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
 	}
 
 	public List<Kartadecka> getKartadeckas() {

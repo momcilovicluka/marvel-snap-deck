@@ -8,15 +8,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/style.css">
 <meta charset="UTF-8" />
 <title>Info o decku</title>
 </head>
 <body>
+<div class="container">
+			<div class="row justify-content-center"
+				style="transform: translateY(20%)">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+						<div class="social d-flex text-center">
+							<a href="${pageContext.request.contextPath}" class="px-2 py-2 mr-md-1 rounded" style="text-align: center;">HOME</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	<c:if test="${!empty deck}">
-		<h1>${deck.idDeck }</h1>
-		<h1>${deck.naziv }</h1>
-		<h1>${deck.opis }</h1>
-		<h1>${deck.kategorija.naziv }</h1>
+		<h1>ID: ${deck.idDeck }</h1>
+		<h1>Naziv: ${deck.naziv }</h1>
+		<h1>Opis: ${deck.opis }</h1>
+		<h1>Kategorija: ${deck.kategorija.naziv }</h1>
+
+		<%@ page import="java.util.List, model.Korisnik, model.Deck"%>
+		<%
+		Korisnik korisnik = (Korisnik) request.getAttribute("korisnik");
+		Deck deck = (Deck) request.getAttribute("deck");
+		if (korisnik.getOmiljenis().stream().anyMatch(o -> o.getDeck().getIdDeck() == deck.getIdDeck()))
+			out.println("<a href=\"ukloniOmiljeni?idDeck=" + deck.getIdDeck() + "\"><i class=\"fa fa-heart\"></i></a>");
+		else
+			out.println("<a href=\"dodajOmiljeni?idDeck=" + deck.getIdDeck() + "\"><i class=\"fa fa-heart-o\"></i></a>");
+		%>
 
 		<c:if test="${!empty karte}">
 			<table border="1">
@@ -39,7 +68,7 @@
 				</c:forEach>
 			</table>
 		</c:if>
-
+		<br>
 		<c:if test="${!empty deck.komentars}">
 			<table border="1">
 				<tr>

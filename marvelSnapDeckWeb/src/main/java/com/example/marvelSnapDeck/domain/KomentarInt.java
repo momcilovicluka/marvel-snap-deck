@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class KomentarInt implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7170392082678872970L;
 	String komentar, idDeck, idKorisnik;
 
 	public String getKomentar() {

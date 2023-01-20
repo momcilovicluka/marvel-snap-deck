@@ -8,6 +8,11 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/style.css" />
+	<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="UTF-8" />
 <title>Marvel Snap Deck</title>
 </head>
@@ -22,7 +27,7 @@
 				</div>
 			</div>
 			<div class="row justify-content-center"
-				style="transform: translateY(40%)">
+				style="transform: translateY(20%)">
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
 						<div class="social d-flex text-center">
@@ -38,36 +43,40 @@
 						<br />
 						<security:authorize access="hasRole('ADMIN')">
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/admin/vratiPrazanTip">Dodaj tip</a>
+								<a href="/marvelSnapDeck/admin/vratiPrazanTip" class="px-2 py-2 mr-md-1 rounded">Dodaj tip</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/admin/vratiPraznuKategoriju">Dodaj
+								<a href="/marvelSnapDeck/admin/vratiPraznuKategoriju" class="px-2 py-2 mr-md-1 rounded">Dodaj
 									kategoriju</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/auth/getEmptyAdmin">Dodaj admina</a>
+								<a href="/marvelSnapDeck/user/vratiPraznuKartu" class="px-2 py-2 mr-md-1 rounded">Dodaj
+									kartu</a>
+							</div>
+							<br />
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/auth/getEmptyAdmin" class="px-2 py-2 mr-md-1 rounded">Dodaj admina</a>
 							</div>
 							<br />
 						</security:authorize>
 						<security:authorize access="hasRole('KORISNIK')">
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/vratiPraznuKartu">Dodaj
-									kartu</a>
+								<a href="/marvelSnapDeck/user/vratiPrazanDeck" class="px-2 py-2 mr-md-1 rounded">Dodaj deck</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/vratiPrazanDeck">Dodaj deck</a>
-							</div>
-							<br />
-							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/vratiPraznuKartadecka">Dodaj
+								<a href="/marvelSnapDeck/user/vratiPraznuKartadecka" class="px-2 py-2 mr-md-1 rounded">Dodaj
 									kartu u deck</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/sviDeckovi">Svi deckovi</a>
+								<a href="/marvelSnapDeck/user/sviDeckovi" class="px-2 py-2 mr-md-1 rounded">Svi deckovi</a>
+							</div>
+							<br />
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/user/sviKorisnici" class="px-2 py-2 mr-md-1 rounded">Dodaj prijatelja</a>
 							</div>
 							<br />
 						</security:authorize>
