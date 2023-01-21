@@ -36,6 +36,7 @@
 		<h1>Naziv: ${deck.naziv }</h1>
 		<h1>Opis: ${deck.opis }</h1>
 		<h1>Kategorija: ${deck.kategorija.naziv }</h1>
+		<h1>Kreator: ${deck.korisnik.username }</h1>
 
 		<%@ page import="java.util.List, model.Korisnik, model.Deck"%>
 		<%
@@ -46,7 +47,9 @@
 		else
 			out.println("<a href=\"dodajOmiljeni?idDeck=" + deck.getIdDeck() + "\"><i class=\"fa fa-heart-o\"></i></a>");
 		%>
+		<div style="text-align: center;">
 
+		
 		<c:if test="${!empty karte}">
 			<table border="1">
 				<tr>
@@ -96,7 +99,7 @@
 				value="${korisnik.idKorisnik }" />
 			<input type="submit" value="Dodaj Komentar">
 		</sf:form>
-
+	</div>
 	</c:if>
 </body>
 </html>

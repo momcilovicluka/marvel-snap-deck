@@ -2,10 +2,13 @@ package com.example.marvelSnapDeck.controllers;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ import com.example.marvelSnapDeck.repositories.KategorijaRepository;
 import com.example.marvelSnapDeck.repositories.KomentarRepository;
 import com.example.marvelSnapDeck.repositories.KorisnikRepository;
 import com.example.marvelSnapDeck.repositories.OmiljeniRepository;
+import com.example.marvelSnapDeck.repositories.PorukaRepository;
 import com.example.marvelSnapDeck.repositories.PrijateljiRepository;
 import com.example.marvelSnapDeck.repositories.TipRepository;
 import com.example.marvelSnapDeck.repositories.UserroleRepository;
@@ -35,6 +39,7 @@ import model.Kategorija;
 import model.Komentar;
 import model.Korisnik;
 import model.Omiljeni;
+import model.Poruka;
 import model.Prijatelji;
 import model.Tip;
 
@@ -72,6 +77,14 @@ public class UserController {
 	@Autowired
 	OmiljeniRepository omiljeniRepository;
 
+	@Autowired
+	PorukaRepository porukaRepository;
+
+	@GetMapping("index")
+	public String index() {
+		return "index";
+	}
+
 	@ModelAttribute
 	public void getTips(Model model) {
 		List<Tip> tipovi = tipRepository.findAll();
@@ -105,7 +118,7 @@ public class UserController {
 		d.setDatum(new Date());
 		deckRepository.save(d);
 		System.out.println("SAVED Deck");
-		return "index";
+		return index();
 	}
 
 	@ModelAttribute
@@ -115,8 +128,15 @@ public class UserController {
 	}
 
 	@ModelAttribute
+	public void getDeckoviKorisnika(Model model, Principal p) {
+		List<Deck> deckoviKorisnika = deckRepository.findByKorisnik(korisnikRepository.findByUsername(p.getName()));
+		model.addAttribute("deckoviKorisnika", deckoviKorisnika);
+	}
+
+	@ModelAttribute
 	public void getKarte(Model model) {
 		List<Karta> karte = kartaRepository.findAll();
+		karte.sort((k1, k2) -> k1.getNaziv().compareToIgnoreCase(k2.getNaziv()));
 		model.addAttribute("karte", karte);
 	}
 
@@ -128,7 +148,7 @@ public class UserController {
 	}
 
 	@PostMapping("dodajKartuUDeck")
-	public String dodajKartuUDeck(@ModelAttribute("Kartadecka") Kartadecka kd) {
+	public String dodajKartuUDeck(Model model, @ModelAttribute("Kartadecka") Kartadecka kd) {
 		String message = "";
 
 		List<Kartadecka> kartedecka = kartaDeckaRepository.findByDeck(kd.getDeck());
@@ -144,7 +164,7 @@ public class UserController {
 
 		kartaDeckaRepository.save(kd);
 		System.out.println("SAVED Kartadecka");
-		return "index";
+		return praznaKartadecka(model);
 	}
 
 	@GetMapping("sviDeckovi")
@@ -198,6 +218,7 @@ public class UserController {
 		prijatelji.setKorisnik1(korisnikRepository.findByUsername(p.getName()));
 		prijatelji.setKorisnik2(korisnikRepository.findById(Integer.parseInt(request.getParameter("id"))).get());
 		prijateljiRepository.save(prijatelji);
+		getKorisnici(model, p);
 		return getsviKorisnici(model, p);
 	}
 
@@ -223,5 +244,53 @@ public class UserController {
 		omiljeniRepository.delete(o);
 		System.out.println("obrisan omiljeni");
 		return getInfoODecku(model, request, p);
+	}
+
+	@GetMapping("vratiPoruke")
+	public String vratiPoruke(Model model, HttpServletRequest request, Principal p) {
+		Korisnik primalac;
+		if (request.getParameter("id") != null)
+			primalac = korisnikRepository.findById(Integer.parseInt(request.getParameter("id"))).get();
+		else
+			primalac = (Korisnik) request.getSession().getAttribute("primalac");
+
+		Korisnik posiljaoc = korisnikRepository.findByUsername(p.getName());
+
+		List<Poruka> poruke = prijateljiRepository.findByKorisnik1AndKorisnik2(posiljaoc, primalac).getPorukas1();
+		poruke.addAll(prijateljiRepository.findByKorisnik1AndKorisnik2(posiljaoc, primalac).getPorukas2());
+
+		poruke.sort((p1, p2) -> p1.getDatum().compareTo(p2.getDatum()));
+
+		model.addAttribute("poruke", poruke);
+		model.addAttribute("posiljaoc", posiljaoc);
+		model.addAttribute("primalac", primalac);
+		request.getSession().setAttribute("posiljaoc", posiljaoc);
+		request.getSession().setAttribute("primalac", primalac);
+
+		Poruka porukaPrazna = new Poruka();
+		model.addAttribute("porukaPrazna", porukaPrazna);
+
+		return "user/posaljiPoruku";
+	}
+
+	@PostMapping("posaljiPoruku")
+	public String posaljiPoruku(@ModelAttribute("porukaPrazna") Poruka por, Model model, HttpServletRequest request,
+			Principal p) {
+		por.setPoruka(request.getParameter("poruka"));
+		por.setDatum(Date.from(Instant.now()));
+
+		Korisnik posiljaoc = (Korisnik) request.getSession().getAttribute("posiljaoc");
+		Korisnik primalac = (Korisnik) request.getSession().getAttribute("primalac");
+
+		Prijatelji prijatelji1 = posiljaoc.getPrijateljis1().stream()
+				.filter(p1 -> p1.getKorisnik2().getIdKorisnik() == primalac.getIdKorisnik()).findFirst().get();
+		Prijatelji prijatelji2 = prijateljiRepository.findByKorisnik1AndKorisnik2(primalac, posiljaoc);
+
+		por.setPrijatelji1(prijatelji1);
+		por.setPrijatelji2(prijatelji2);
+
+		porukaRepository.save(por);
+
+		return vratiPoruke(model, request, p);
 	}
 }

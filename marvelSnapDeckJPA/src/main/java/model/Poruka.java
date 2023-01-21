@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -16,6 +17,9 @@ public class Poruka implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idPoruka;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date datum;
 
 	private String poruka;
 
@@ -38,6 +42,14 @@ public class Poruka implements Serializable {
 
 	public void setIdPoruka(int idPoruka) {
 		this.idPoruka = idPoruka;
+	}
+
+	public Date getDatum() {
+		return this.datum;
+	}
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
 	}
 
 	public String getPoruka() {

@@ -44,7 +44,7 @@ public class Korisnik implements Serializable {
 	private List<Omiljeni> omiljenis;
 
 	//bi-directional many-to-one association to Prijatelji
-	@OneToMany(mappedBy="korisnik1")
+	@OneToMany(mappedBy="korisnik1", fetch= FetchType.EAGER)
 	private List<Prijatelji> prijateljis1;
 
 	//bi-directional many-to-one association to Prijatelji

@@ -52,7 +52,7 @@
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/vratiPraznuKartu" class="px-2 py-2 mr-md-1 rounded">Dodaj
+								<a href="/marvelSnapDeck/admin/vratiPraznuKartu" class="px-2 py-2 mr-md-1 rounded">Dodaj
 									kartu</a>
 							</div>
 							<br />
@@ -76,7 +76,7 @@
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/sviKorisnici" class="px-2 py-2 mr-md-1 rounded">Dodaj prijatelja</a>
+								<a href="/marvelSnapDeck/user/sviKorisnici" class="px-2 py-2 mr-md-1 rounded">Prijatelji</a>
 							</div>
 							<br />
 						</security:authorize>

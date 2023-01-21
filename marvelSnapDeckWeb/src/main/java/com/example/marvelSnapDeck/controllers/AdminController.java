@@ -22,7 +22,6 @@ import com.example.marvelSnapDeck.repositories.TipRepository;
 import model.Karta;
 import model.Kategorija;
 import model.Tip;
-import model.Userrole;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -51,6 +50,12 @@ public class AdminController {
 		return "index";
 	}
 
+	@ModelAttribute
+	public void getTips(Model model) {
+		List<Tip> tipovi = tipRepository.findAll();
+		model.addAttribute("tipovi", tipovi);
+	}
+
 	@GetMapping("vratiPraznuKartu")
 	public String praznaKarta(Model model) {
 		KartaImage ki = new KartaImage();
@@ -59,7 +64,7 @@ public class AdminController {
 	}
 
 	@PostMapping("dodajKartu")
-	public String dodajKartu(@ModelAttribute("Karta") KartaImage ki) throws IOException {
+	public String dodajKartu(Model model, @ModelAttribute("Karta") KartaImage ki) throws IOException {
 		Karta k = new Karta();
 		k.setIdKarta(ki.getIdKarta());
 		k.setNaziv(ki.getNaziv());
@@ -77,7 +82,7 @@ public class AdminController {
 
 		kartaRepository.save(k);
 		System.out.println("SAVED Karta");
-		return "index";
+		return praznaKarta(model);
 	}
 
 	@GetMapping("vratiPraznuKategoriju")
