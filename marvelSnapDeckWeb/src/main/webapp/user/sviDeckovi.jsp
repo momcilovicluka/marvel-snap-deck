@@ -31,7 +31,7 @@
 		</div>
 	</div>
 	<c:if test="${!empty deckovi}">
-		<div style="text-align: center;">
+		<div style="text-align: center; margin-top:50px">
 
 			<table border="1">
 				<tr>

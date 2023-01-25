@@ -6,4 +6,6 @@ import model.Tip;
 
 public interface TipRepository extends JpaRepository<Tip, Integer> {
 
+	Tip findByTip(String naziv);
+
 }

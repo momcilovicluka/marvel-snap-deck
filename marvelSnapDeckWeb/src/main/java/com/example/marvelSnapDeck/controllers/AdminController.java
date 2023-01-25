@@ -3,6 +3,7 @@ package com.example.marvelSnapDeck.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,9 @@ public class AdminController {
 	KartaRepository kartaRepository;
 
 	@GetMapping("vratiPrazanTip")
-	public String prazanTip(Model model) {
+	public String prazanTip(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		Tip t = new Tip();
 		model.addAttribute("TipKarte", t);
 		return "admin/dodajTip";
@@ -57,14 +60,16 @@ public class AdminController {
 	}
 
 	@GetMapping("vratiPraznuKartu")
-	public String praznaKarta(Model model) {
+	public String praznaKarta(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		KartaImage ki = new KartaImage();
 		model.addAttribute("KartaImage", ki);
 		return "admin/dodajKartu";
 	}
 
 	@PostMapping("dodajKartu")
-	public String dodajKartu(Model model, @ModelAttribute("Karta") KartaImage ki) throws IOException {
+	public String dodajKartu(Model model, @ModelAttribute("Karta") KartaImage ki, Principal p) throws IOException {
 		Karta k = new Karta();
 		k.setIdKarta(ki.getIdKarta());
 		k.setNaziv(ki.getNaziv());
@@ -82,11 +87,13 @@ public class AdminController {
 
 		kartaRepository.save(k);
 		System.out.println("SAVED Karta");
-		return praznaKarta(model);
+		return praznaKarta(model, p);
 	}
 
 	@GetMapping("vratiPraznuKategoriju")
-	public String praznaKategorija(Model model) {
+	public String praznaKategorija(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		Kategorija k = new Kategorija();
 		model.addAttribute("Kategorija", k);
 		return "admin/dodajKategoriju";

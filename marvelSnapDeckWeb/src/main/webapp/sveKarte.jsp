@@ -30,6 +30,26 @@
 		</div>
 	</div>
 
+	<form action="sveKarte" method="get" style="margin-top: 20px;">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0" style="text-align: center;">
+						<input type="text" name="naziv" placeholder="Naziv karte"
+							class="form-control" /> <select name="tip" class="form-control">
+							<option value="" style="background-color: #000050;">Svi
+								tipovi</option>
+							<c:forEach items="${tipovi }" var="t">
+								<option value="${t.tip }" style="background-color: #000030;">${t.tip }</option>
+							</c:forEach>
+						</select> <input type="submit" value="Pretrazi" class="btn btn-primary"
+							style="margin-top: 10px; color: white;" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
 	<c:if test="${!empty karte}">
 		<!-- 
 		<table border="1">
@@ -61,19 +81,25 @@
 				<div class="imgBx">
 					<img src="data:image/png;base64,${k.slika64 }" />
 				</div>
-				<div class="content">
-					<div>
-						<h2>${k.naziv }</h2>
-						<p>Tip: ${k.tip.tip }</p>
-						<p>Opis: ${k.opis }</p>
+				<a href="izvestajKarta?id=${k.idKarta }">
+					<div class="content">
+						<div>
+							<h2>${k.naziv }</h2>
+							<p>Tip: ${k.tip.tip }</p>
+							<p>Opis: ${k.opis }</p>
+						</div>
 					</div>
-				</div>
+				</a>
 			</div>
 			<c:if test="${status.index % 3 == 2 }">
 				</div>
 			</c:if>
 		</c:forEach>
 	</c:if>
+
+	<a href="#" class="back-to-top"
+		style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"><i
+		class="fa fa-chevron-up" style="font-size: 50px;"></i></a>
 
 </body>
 </html>

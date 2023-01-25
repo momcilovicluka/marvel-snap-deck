@@ -5,10 +5,8 @@ import java.security.Principal;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +104,9 @@ public class UserController {
 	}
 
 	@GetMapping("vratiPrazanDeck")
-	public String prazanDeck(Model model) {
+	public String prazanDeck(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		Deck d = new Deck();
 		model.addAttribute("Deck", d);
 		return "user/dodajDeck";
@@ -114,6 +114,8 @@ public class UserController {
 
 	@PostMapping("dodajDeck")
 	public String dodajDeck(@ModelAttribute("Deck") Deck d, Principal p) {
+		if (p == null)
+			return "index";
 		d.setKorisnik(korisnikRepository.findByUsername(p.getName()));
 		d.setDatum(new Date());
 		deckRepository.save(d);
@@ -128,9 +130,12 @@ public class UserController {
 	}
 
 	@ModelAttribute
-	public void getDeckoviKorisnika(Model model, Principal p) {
+	public String getDeckoviKorisnika(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		List<Deck> deckoviKorisnika = deckRepository.findByKorisnik(korisnikRepository.findByUsername(p.getName()));
 		model.addAttribute("deckoviKorisnika", deckoviKorisnika);
+		return "";
 	}
 
 	@ModelAttribute
@@ -141,16 +146,20 @@ public class UserController {
 	}
 
 	@GetMapping("vratiPraznuKartadecka")
-	public String praznaKartadecka(Model model) {
+	public String praznaKartadecka(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		Kartadecka kd = new Kartadecka();
 		model.addAttribute("Kartadecka", kd);
 		return "user/dodajKartuUDeck";
 	}
 
 	@PostMapping("dodajKartuUDeck")
-	public String dodajKartuUDeck(Model model, @ModelAttribute("Kartadecka") Kartadecka kd) {
-		String message = "";
+	public String dodajKartuUDeck(Model model, @ModelAttribute("Kartadecka") Kartadecka kd, Principal p) {
+		if (p == null)
+			return "index";
 
+		String message = "";
 		List<Kartadecka> kartedecka = kartaDeckaRepository.findByDeck(kd.getDeck());
 		int n = kartedecka.size();
 		if (n > 11)
@@ -164,11 +173,13 @@ public class UserController {
 
 		kartaDeckaRepository.save(kd);
 		System.out.println("SAVED Kartadecka");
-		return praznaKartadecka(model);
+		return praznaKartadecka(model, p);
 	}
 
 	@GetMapping("sviDeckovi")
 	public String getSviDeckovi(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		model.addAttribute("korisnik", korisnikRepository.findByUsername(p.getName()));
 		return "user/sviDeckovi";
 	}
@@ -176,6 +187,8 @@ public class UserController {
 	@GetMapping("vratiDeck")
 	public String getInfoODecku(Model model, HttpServletRequest request, Principal p)
 			throws UnsupportedEncodingException {
+		if (p == null)
+			return "index";
 		Deck deck = deckRepository.findById(Integer.parseInt(request.getParameter("idDeck"))).get();
 		List<Karta> karte = kartaDeckaRepository.findKarteByDeckId(deck.getIdDeck());
 		spremiSlike(karte);
@@ -191,6 +204,8 @@ public class UserController {
 	@PostMapping("dodajKomentar")
 	public String dodajKomentar(@ModelAttribute KomentarInt ki, Model model, HttpServletRequest request, Principal p)
 			throws UnsupportedEncodingException {
+		if (p == null)
+			return "index";
 		Komentar k = new Komentar();
 		k.setKomentar(ki.getKomentar());
 		k.setKorisnik(korisnikRepository.findById(Integer.parseInt(ki.getIdKorisnik())).get());
@@ -201,19 +216,26 @@ public class UserController {
 
 	@GetMapping("sviKorisnici")
 	public String getsviKorisnici(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		model.addAttribute("korisnik", korisnikRepository.findByUsername(p.getName()));
 		return "user/sviKorisnici";
 	}
 
 	@ModelAttribute
-	public void getKorisnici(Model model, Principal p) {
+	public String getKorisnici(Model model, Principal p) {
+		if (p == null)
+			return "index";
 		List<Korisnik> korisnici = korisnikRepository.findByUserrole(UserroleRepository.findByNaziv("KORISNIK"));
 		korisnici.removeIf(k -> k.getUsername().equals(p.getName()));
 		model.addAttribute("korisnici", korisnici);
+		return "";
 	}
 
 	@GetMapping("dodajPrijatelja")
 	public String dodajPrijatelja(Model model, HttpServletRequest request, Principal p) {
+		if (p == null)
+			return "index";
 		Prijatelji prijatelji = new Prijatelji();
 		prijatelji.setKorisnik1(korisnikRepository.findByUsername(p.getName()));
 		prijatelji.setKorisnik2(korisnikRepository.findById(Integer.parseInt(request.getParameter("id"))).get());
@@ -225,6 +247,8 @@ public class UserController {
 	@GetMapping("dodajOmiljeni")
 	public String dodajOmiljeni(Model model, HttpServletRequest request, Principal p)
 			throws UnsupportedEncodingException {
+		if (p == null)
+			return "index";
 		Deck d = deckRepository.findById(Integer.parseInt(request.getParameter("idDeck"))).get();
 		Korisnik k = korisnikRepository.findByUsername(p.getName());
 		Omiljeni o = new Omiljeni();
@@ -238,6 +262,8 @@ public class UserController {
 	@GetMapping("ukloniOmiljeni")
 	public String ukloniOmiljeni(Model model, HttpServletRequest request, Principal p)
 			throws UnsupportedEncodingException {
+		if (p == null)
+			return "index";
 		Deck d = deckRepository.findById(Integer.parseInt(request.getParameter("idDeck"))).get();
 		Korisnik k = korisnikRepository.findByUsername(p.getName());
 		Omiljeni o = omiljeniRepository.findByDeckAndKorisnik(d, k);
@@ -248,6 +274,8 @@ public class UserController {
 
 	@GetMapping("vratiPoruke")
 	public String vratiPoruke(Model model, HttpServletRequest request, Principal p) {
+		if (p == null)
+			return "index";
 		Korisnik primalac;
 		if (request.getParameter("id") != null)
 			primalac = korisnikRepository.findById(Integer.parseInt(request.getParameter("id"))).get();
@@ -276,6 +304,8 @@ public class UserController {
 	@PostMapping("posaljiPoruku")
 	public String posaljiPoruku(@ModelAttribute("porukaPrazna") Poruka por, Model model, HttpServletRequest request,
 			Principal p) {
+		if (p == null)
+			return "index";
 		por.setPoruka(request.getParameter("poruka"));
 		por.setDatum(Date.from(Instant.now()));
 

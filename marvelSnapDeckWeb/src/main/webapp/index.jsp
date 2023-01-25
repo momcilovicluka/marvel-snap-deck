@@ -16,7 +16,7 @@
 <meta charset="UTF-8" />
 <title>Marvel Snap Deck</title>
 </head>
-<body style="background-image: url('images/background.jpg')">
+<body style="background-image: url('images/background.jpg'); background-color: #000030;">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -32,7 +32,8 @@
 					<div class="login-wrap p-0">
 						<div class="social d-flex text-center">
 							<a href="/marvelSnapDeck/auth/loginPage"
-								class="px-2 py-2 mr-md-1 rounded">Log In</a>
+								class="px-2 py-2 mr-md-1 rounded"> Login </a>
+							</a>
 						</div>
 						<br />
 						<div class="social d-flex text-center">
