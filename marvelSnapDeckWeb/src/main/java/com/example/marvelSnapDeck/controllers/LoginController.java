@@ -161,34 +161,41 @@ public class LoginController {
 	@GetMapping("izvestajKarta")
 	public void izvestajKarta(Model model, HttpServletRequest request, HttpServletResponse response, Principal p)
 			throws JRException, IOException {
-		if (p == null || !korisnikRepository.findByUsername(p.getName()).getUserrole().getNaziv().equals("ADMIN"))
+
+		if (p == null) {
 			response.sendRedirect("sveKarte");
+		} else {
 
-		Karta karta = kartaRepository.findById(Integer.parseInt(request.getParameter("id"))).get();
+			if (!korisnikRepository.findByUsername(p.getName()).getUserrole().getNaziv().equals("ADMIN"))
+				response.sendRedirect("../user/sviDeckovi?id=" + request.getParameter("id"));
+			else {
+				Karta karta = kartaRepository.findById(Integer.parseInt(request.getParameter("id"))).get();
 
-		List<Deck> deckovi = new LinkedList<>();
-		for (Kartadecka kd : karta.getKartadeckas()) {
-			deckovi.add(kd.getDeck());
+				List<Deck> deckovi = new LinkedList<>();
+				for (Kartadecka kd : karta.getKartadeckas()) {
+					deckovi.add(kd.getDeck());
+				}
+
+				response.setContentType("text/html");
+				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(deckovi);
+				InputStream inputStream = this.getClass().getResourceAsStream("/jasperreports/kartaUDeckovima.jrxml");
+				JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+				inputStream.close();
+
+				Map<String, Object> params = new HashMap<>();
+				params.put("naziv", karta.getNaziv());
+				params.put("tip", karta.getTip().getTip());
+				params.put("opis", karta.getOpis());
+
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+
+				response.setContentType("application/x-download");
+				response.addHeader("Content-disposition",
+						"attachment; filename=" + karta.getNaziv().replace(" ", "") + "UDeckovima" + ".pdf");
+
+				OutputStream out = response.getOutputStream();
+				JasperExportManager.exportReportToPdfStream(jasperPrint, out);
+			}
 		}
-
-		response.setContentType("text/html");
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(deckovi);
-		InputStream inputStream = this.getClass().getResourceAsStream("/jasperreports/kartaUDeckovima.jrxml");
-		JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
-		inputStream.close();
-
-		Map<String, Object> params = new HashMap<>();
-		params.put("naziv", karta.getNaziv());
-		params.put("tip", karta.getTip().getTip());
-		params.put("opis", karta.getOpis());
-
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
-
-		response.setContentType("application/x-download");
-		response.addHeader("Content-disposition",
-				"attachment; filename=" + karta.getNaziv().replace(" ", "") + "UDeckovima" + ".pdf");
-
-		OutputStream out = response.getOutputStream();
-		JasperExportManager.exportReportToPdfStream(jasperPrint, out);
 	}
 }

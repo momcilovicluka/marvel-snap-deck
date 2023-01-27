@@ -43,7 +43,7 @@
 								<option value="${t.tip }" style="background-color: #000030;">${t.tip }</option>
 							</c:forEach>
 						</select> <input type="submit" value="Pretrazi" class="btn btn-primary"
-							style="margin-top: 10px; color: white;" />
+							style="margin-top: 10px; color: white !important;" />
 					</div>
 				</div>
 			</div>

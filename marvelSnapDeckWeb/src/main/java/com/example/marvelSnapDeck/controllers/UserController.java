@@ -177,9 +177,18 @@ public class UserController {
 	}
 
 	@GetMapping("sviDeckovi")
-	public String getSviDeckovi(Model model, Principal p) {
+	public String getSviDeckovi(Model model, Principal p, HttpServletRequest request) {
 		if (p == null)
 			return "index";
+		if (request.getParameter("kategorija") != null && !request.getParameter("kategorija").isBlank()) {
+			Kategorija k = kategorijaRepository.findById(Integer.parseInt(request.getParameter("kategorija"))).get();
+			List<Deck> deckovi = deckRepository.findByKategorija(k);
+			model.addAttribute("deckovi", deckovi);
+		} else if (request.getParameter("id") != null && !request.getParameter("id").isBlank()) {
+			Karta karta = kartaRepository.findById(Integer.parseInt(request.getParameter("id"))).get();
+			List<Deck> deckovi = deckRepository.findByKarta(karta);
+			model.addAttribute("deckovi", deckovi);
+		}
 		model.addAttribute("korisnik", korisnikRepository.findByUsername(p.getName()));
 		return "user/sviDeckovi";
 	}
