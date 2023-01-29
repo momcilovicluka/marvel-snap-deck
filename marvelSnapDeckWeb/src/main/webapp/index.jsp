@@ -8,7 +8,7 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/style.css" />
-	<link
+<link
 	href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet"
@@ -16,7 +16,8 @@
 <meta charset="UTF-8" />
 <title>Marvel Snap Deck</title>
 </head>
-<body style="background-image: url('images/background.jpg'); background-color: #000030;">
+<body
+	style="background-image: url('images/background.jpg'); background-color: #000030;">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -33,51 +34,60 @@
 						<div class="social d-flex text-center">
 							<a href="/marvelSnapDeck/auth/loginPage"
 								class="px-2 py-2 mr-md-1 rounded"> Login </a>
-							</a>
 						</div>
 						<br />
 						<div class="social d-flex text-center">
 							<a href="/marvelSnapDeck/auth/sveKarte"
-								class="px-2 py-2 mr-md-1 rounded">Pregled
-								Karata</a>
+								class="px-2 py-2 mr-md-1 rounded">Pregled Karata</a>
 						</div>
 						<br />
 						<security:authorize access="hasRole('ADMIN')">
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/admin/vratiPrazanTip" class="px-2 py-2 mr-md-1 rounded">Dodaj tip</a>
+								<a href="/marvelSnapDeck/admin/vratiPrazanTip"
+									class="px-2 py-2 mr-md-1 rounded">Dodaj tip</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/admin/vratiPraznuKategoriju" class="px-2 py-2 mr-md-1 rounded">Dodaj
-									kategoriju</a>
+								<a href="/marvelSnapDeck/admin/vratiPraznuKategoriju"
+									class="px-2 py-2 mr-md-1 rounded">Dodaj kategoriju</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/admin/vratiPraznuKartu" class="px-2 py-2 mr-md-1 rounded">Dodaj
-									kartu</a>
+								<a href="/marvelSnapDeck/admin/vratiPraznuKartu"
+									class="px-2 py-2 mr-md-1 rounded">Dodaj kartu</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/auth/getEmptyAdmin" class="px-2 py-2 mr-md-1 rounded">Dodaj admina</a>
+								<a href="/marvelSnapDeck/auth/getEmptyAdmin"
+									class="px-2 py-2 mr-md-1 rounded">Dodaj admina</a>
+							</div>
+							<br />
+							<div class="social d-flex text-center">
+								<a href="/marvelSnapDeck/admin/statistika"
+									class="px-2 py-2 mr-md-1 rounded">Statistika</a>
 							</div>
 							<br />
 						</security:authorize>
+						
 						<security:authorize access="hasRole('KORISNIK')">
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/vratiPrazanDeck" class="px-2 py-2 mr-md-1 rounded">Dodaj deck</a>
+								<a href="/marvelSnapDeck/user/vratiPrazanDeck"
+									class="px-2 py-2 mr-md-1 rounded">Dodaj deck</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/vratiPraznuKartadecka" class="px-2 py-2 mr-md-1 rounded">Dodaj
-									kartu u deck</a>
+								<a href="/marvelSnapDeck/user/vratiPraznuKartadecka"
+									class="px-2 py-2 mr-md-1 rounded">Dodaj kartu u deck</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/sviDeckovi" class="px-2 py-2 mr-md-1 rounded">Svi deckovi</a>
+								<a href="/marvelSnapDeck/user/sviDeckovi"
+									class="px-2 py-2 mr-md-1 rounded">Svi deckovi</a>
 							</div>
 							<br />
 							<div class="social d-flex text-center">
-								<a href="/marvelSnapDeck/user/sviKorisnici" class="px-2 py-2 mr-md-1 rounded">Prijatelji</a>
+								<a href="/marvelSnapDeck/user/sviKorisnici"
+									class="px-2 py-2 mr-md-1 rounded">Prijatelji</a>
 							</div>
 							<br />
 						</security:authorize>

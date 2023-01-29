@@ -1,5 +1,6 @@
 package com.example.marvelSnapDeck.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +21,6 @@ public interface DeckRepository extends JpaRepository<Deck, Integer> {
 	@Query("SELECT d FROM Deck d inner join d.kartadeckas kd where kd.karta = :karta")
 	List<Deck> findByKarta(@Param("karta") Karta karta);
 
+	@Query("SELECT d FROM Deck d where d.datum between :startDate and :endDate")
+	List<Deck> findByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

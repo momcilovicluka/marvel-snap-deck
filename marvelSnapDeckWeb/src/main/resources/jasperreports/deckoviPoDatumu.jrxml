@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="kartaUDeckovima" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="24c9571d-9b2d-468f-b919-42d8c3cbafe3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="naziv" class="java.lang.String"/>
+	<parameter name="tip" class="java.lang.String"/>
+	<parameter name="opis" class="java.lang.String"/>
+	<parameter name="startDate" class="java.lang.String"/>
+	<parameter name="endDate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idDeck" class="java.lang.Integer"/>
+	<field name="datum" class="java.util.Date"/>
+	<field name="naziv" class="java.lang.String"/>
+	<field name="opis" class="java.lang.String"/>
+	<field name="kategorija.naziv" class="java.lang.String"/>
+	<field name="korisnik.username" class="java.lang.String"/>
+	<group name="DatumGroup">
+		<groupExpression><![CDATA[$F{datum}]]></groupExpression>
+		<groupHeader>
+			<band height="60">
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="80" height="30" forecolor="#000000" backcolor="#0000FF" uuid="f801c13c-938e-4884-b7cd-75b951167564"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Datum:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Transparent" x="80" y="0" width="100" height="30" forecolor="#FF085A" backcolor="#0000FF" uuid="222f3dd0-1865-4a10-a05b-c4e4370adcf7">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="827dce00-7d6a-42af-b00d-a716c1785d50"/>
+					</reportElement>
+					<box leftPadding="3">
+						<pen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{datum}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="30" width="80" height="30" forecolor="#FFFFFF" backcolor="#000030" uuid="a5555e51-1995-4f54-a9f8-4c8eb14e85e9"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Double" lineColor="#0000FF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[ID]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="80" y="30" width="100" height="30" forecolor="#FFFFFF" backcolor="#390044" uuid="cd6cad93-4781-4f07-903c-da8ec464d592"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Double" lineColor="#0000FF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Naziv]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="180" y="30" width="100" height="30" forecolor="#FFFFFF" backcolor="#000030" uuid="1e1f559a-412b-41ce-9ac6-90b0960eed17"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Double" lineColor="#0000FF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Kreator]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="280" y="30" width="100" height="30" forecolor="#FFFFFF" backcolor="#390044" uuid="64e2e49a-455a-495b-b0f7-85c01b257cce"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Double" lineColor="#0000FF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Kategorija]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="380" y="30" width="174" height="30" forecolor="#FFFFFF" backcolor="#000030" uuid="2cdc36f3-584c-45f1-860e-cb232bbf68e0"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Double" lineColor="#0000FF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Opis]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="40">
+				<textField>
+					<reportElement mode="Transparent" x="80" y="0" width="30" height="30" forecolor="#0000FF" backcolor="#0000FF" uuid="688e3ede-eb22-4fd2-8b6f-f3703eec83ca"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{DatumGroup_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="80" height="30" uuid="e1de0d90-db5c-4a88-900b-c714a4ceb7ef"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Broj deckova:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="60" forecolor="#0000FF" uuid="eb0923a4-87df-4589-ac14-e532a4aa59d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deckovi po datumu]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement mode="Transparent" x="268" y="0" width="72" height="30" forecolor="#B703FF" uuid="ee76c794-5d7d-400c-8805-237d1098e2ca"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{startDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="108" y="0" width="160" height="30" uuid="d31b84d9-0935-4699-a048-315fa6f29e23"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Deckovi kreirani izmedju]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="0" width="2" height="30" uuid="4c3055ee-b7eb-473a-b514-d4ac8de6f927"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[i]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="352" y="0" width="90" height="30" forecolor="#B703FF" uuid="d03a7a46-db54-45cd-a363-f94d856bd6d2"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{endDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#030000" backcolor="#03FF3D" uuid="430b184f-a09d-401b-b851-902b35b62491">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="83494d63-7e1d-4179-8870-4e77c2c6e202"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#0000FF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idDeck}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="80" y="0" width="100" height="30" forecolor="#030000" backcolor="#03EAFF" uuid="d51dd227-2a57-4b6b-9fd6-8761fbd818c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2c4ca645-bcb1-47db-9fae-c563dd3ebe8b"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#0000FF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{naziv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="180" y="0" width="100" height="30" forecolor="#030000" backcolor="#03FF3D" uuid="c3686d01-0295-4bc0-b596-a7994a9f5392">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f2b9c429-1520-4145-8a52-75c876bc0b4c"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#0000FF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{korisnik.username}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="380" y="0" width="174" height="30" forecolor="#030000" backcolor="#03FF3D" uuid="eb78f271-59a8-429b-a016-9618d2b70bbc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="836f3bbf-8062-4355-ad21-b366841b01e5"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#0000FF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{opis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="280" y="0" width="100" height="30" forecolor="#030000" backcolor="#03EAFF" uuid="13521bdf-84ec-4a75-9891-88e0049fbe55"/>
+				<box>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#0000FF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kategorija.naziv}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="520" y="0" width="34" height="30" forecolor="#05FF76" backcolor="#0000FF" uuid="54edeed0-cf4b-4cf5-9ede-5e11a678845c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
