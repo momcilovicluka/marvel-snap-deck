@@ -29,7 +29,7 @@
 			<div class="row justify-content-center"
 				style="transform: translateY(30%)">
 				<div class="col-md-6 col-lg-4"
-					style="background-color: rgba(0, 0, 30, 0.9); border-radius: 20px; padding: 40px;">
+					style="background-color: rgba(0, 0, 45, 0.8); backdrop-filter: blur(15px); border-radius: 20px; padding: 40px;">
 					<div class="login-wrap p-0">
 						<form action="${loginUrl}" method="post" class="signin-form">
 							<div class="form-group">

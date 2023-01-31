@@ -15,7 +15,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Dodaj Deck</title>
 </head>
-<body>
+<body class="img js-fullheight"
+style="background-image: url(../images/background.jpg);">
 	<div class="container">
 		<div class="row justify-content-center"
 			style="transform: translateY(20%)">
@@ -28,10 +29,17 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<sf:form modelAttribute="Kartadecka" action="dodajKartuUDeck"
+	<c:if test="${!empty message}">
+		<h3 style="color: rgb(255, 0, 64); text-align: center; font-size: 20px; font-weight: bold; margin-top: 20px;">
+		${message}</h3>
+	</c:if>
+	<div class="row justify-content-center"
+			style="transform: translateY(20%)">
+			<div class="col-md-6 col-lg-4">
+				<div class="login-wrap p-0" style="text-align: center;">
+	<sf:form modelAttribute="Kartadecka" action="dodajKartuUDeck" class="signin-form"
 		method="post">
-		<table>
+		<table style="margin: 0 auto;">
 			<tr>
 				<td>Deck</td>
 				<td><sf:select path="deck" items="${deckoviKorisnika}"
@@ -43,9 +51,12 @@
 						itemValue="idKarta" itemLabel="naziv" required="true" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Sacuvaj"></td>
+				<td colspan="2"><input type="submit" value="Dodaj" class="form-control btn btn-primary submit px-3" style="color: white;"></td>
 			</tr>
 		</table>
 	</sf:form>
+	</div>
+			</div>
+		</div>
 </body>
 </html>

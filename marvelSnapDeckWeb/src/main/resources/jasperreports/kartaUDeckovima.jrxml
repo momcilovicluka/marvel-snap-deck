@@ -198,7 +198,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{opis}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="YYYY-MM-DD">
 				<reportElement mode="Opaque" x="280" y="0" width="100" height="30" forecolor="#030000" backcolor="#03EAFF" uuid="13521bdf-84ec-4a75-9891-88e0049fbe55"/>
 				<box>
 					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#0000FF"/>

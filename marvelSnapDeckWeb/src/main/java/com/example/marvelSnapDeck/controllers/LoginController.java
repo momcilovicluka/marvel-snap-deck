@@ -153,6 +153,8 @@ public class LoginController {
 			String base64Encoded = new String(encodeBase64, "UTF-8");
 			karta.setSlika64(base64Encoded);
 		}
+		
+		karte.sort((k1, k2) -> k1.getNaziv().compareToIgnoreCase(k2.getNaziv()));
 
 		model.addAttribute("karte", karte);
 		return "sveKarte";

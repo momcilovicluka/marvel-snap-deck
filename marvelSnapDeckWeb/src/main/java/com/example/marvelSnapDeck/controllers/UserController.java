@@ -163,11 +163,12 @@ public class UserController {
 		List<Kartadecka> kartedecka = kartaDeckaRepository.findByDeck(kd.getDeck());
 		int n = kartedecka.size();
 		if (n > 11)
-			message += "Deck je pun";
+			message += "Deck je pun.";
 
 		if (kartedecka.parallelStream().filter(k -> k.getKarta().equals(kd.getKarta())).count() > 0)
-			message += " Karta je vec u decku";
+			message += " Karta je vec u decku.";
 		System.out.println(message);
+		model.addAttribute("message", message);
 		if (!message.isEmpty())
 			return "user/dodajKartuUDeck";
 

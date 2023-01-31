@@ -36,20 +36,19 @@
 			style="transform: translateY(20%)">
 			<div class="col-md-6 col-lg-4">
 				<div class="login-wrap p-0">
-						<form action="${pageContext.request.contextPath}/user/sviDeckovi"
-							method="get">
-							<div style="text-align: center; margin-top: 50px">
-								<label for="kategorija" class="form-label" style="color: white;">
-									Kategorija:</label> <select name="kategorija" id="kategorija">
-									<option value="">Sve</option>
-									<c:forEach items="${kategorije }" var="k">
-										<option value="${k.idKategorija }">${k.naziv }</option>
-									</c:forEach>
-								</select> <br> <input type="submit" value="Pretrazi"
-									class="btn btn-primary"
-									style="color: white !important;">
-							</div>
-						</form>
+					<form action="${pageContext.request.contextPath}/user/sviDeckovi"
+						method="get">
+						<div style="text-align: center; margin-top: 50px">
+							<label for="kategorija" class="form-label" style="color: white;">
+								Kategorija:</label> <select name="kategorija" id="kategorija">
+								<option value="">Sve</option>
+								<c:forEach items="${kategorije }" var="k">
+									<option value="${k.idKategorija }">${k.naziv }</option>
+								</c:forEach>
+							</select> <br> <input type="submit" value="Pretrazi"
+								class="btn btn-primary" style="color: white !important;">
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -62,6 +61,7 @@
 						<th>Naziv</th>
 						<th>Opis</th>
 						<th>Kategorija</th>
+						<th>Kreator</th>
 						<th>Detalji</th>
 					</tr>
 					<c:forEach items="${deckovi }" var="d">
@@ -70,6 +70,7 @@
 							<td>${d.naziv }</td>
 							<td>${d.opis }</td>
 							<td>${d.kategorija.naziv }</td>
+							<td>${d.korisnik.username }</td>
 							<td><a
 								href="/marvelSnapDeck/user/vratiDeck?idDeck=${d.idDeck }">Detalji</a></td>
 						</tr>
