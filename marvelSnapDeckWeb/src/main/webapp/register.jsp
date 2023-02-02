@@ -45,7 +45,7 @@
 										value="${_csrf.token}" /></td>
 								</tr>
 								<tr>
-									<td><input type="submit" value="Sacuvaj"></td>
+									<td><input type="submit" value="Register"></td>
 								</tr>
 							</table>
 						</sf:form>

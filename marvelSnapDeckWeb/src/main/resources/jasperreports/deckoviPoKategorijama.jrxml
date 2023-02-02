@@ -15,7 +15,7 @@
 	<field name="kategorija.naziv" class="java.lang.String"/>
 	<field name="korisnik.username" class="java.lang.String"/>
 	<group name="DatumGroup">
-		<groupExpression><![CDATA[$F{datum}]]></groupExpression>
+		<groupExpression><![CDATA[$F{kategorija.naziv}]]></groupExpression>
 		<groupHeader>
 			<band height="60">
 				<staticText>

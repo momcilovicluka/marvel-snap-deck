@@ -1,5 +1,6 @@
 package com.example.marvelSnapDeck.controllers;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.time.Instant;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -243,15 +245,22 @@ public class UserController {
 	}
 
 	@GetMapping("dodajPrijatelja")
-	public String dodajPrijatelja(Model model, HttpServletRequest request, Principal p) {
+	public void dodajPrijatelja(Model model, HttpServletRequest request, Principal p, HttpServletResponse response)
+			throws IOException {
 		if (p == null)
-			return "index";
+			response.sendRedirect("/../index");
 		Prijatelji prijatelji = new Prijatelji();
 		prijatelji.setKorisnik1(korisnikRepository.findByUsername(p.getName()));
 		prijatelji.setKorisnik2(korisnikRepository.findById(Integer.parseInt(request.getParameter("id"))).get());
-		prijateljiRepository.save(prijatelji);
-		getKorisnici(model, p);
-		return getsviKorisnici(model, p);
+		if (null == prijateljiRepository.findByKorisnik1AndKorisnik2(korisnikRepository.findByUsername(p.getName()),
+				korisnikRepository.findById(Integer.parseInt(request.getParameter("id"))).get()))
+			prijateljiRepository.saveAndFlush(prijatelji);
+		model.addAttribute("korisnik", korisnikRepository.findByUsername(p.getName()));
+		List<Korisnik> korisnici = korisnikRepository.findByUserrole(UserroleRepository.findByNaziv("KORISNIK"));
+		korisnici.removeIf(k -> k.getUsername().equals(p.getName()));
+		model.addAttribute("korisnici", korisnici);
+		response.sendRedirect("sviKorisnici");
+		// return "user/sviKorisnici";
 	}
 
 	@GetMapping("dodajOmiljeni")

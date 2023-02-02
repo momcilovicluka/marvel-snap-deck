@@ -26,19 +26,37 @@
 						Snap Deck</h1>
 				</div>
 			</div>
+			<c:if test="${param.error}">
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center mb-5">
+						<h1 class="heading-section"
+							style="font-size: 30px; transform: translateY(-10%)">Invalid
+							username or password.</h1>
+					</div>
+				</div>
+			</c:if>
 			<div class="row justify-content-center"
-				style="transform: translateY(30%)">
+				style="transform: translateY(9%)">
 				<div class="col-md-6 col-lg-4"
 					style="background-color: rgba(0, 0, 45, 0.8); backdrop-filter: blur(15px); border-radius: 20px; padding: 40px;">
 					<div class="login-wrap p-0">
 						<form action="${loginUrl}" method="post" class="signin-form">
+							<%
+							String error1 = (String) request.getParameter("error");
+							if (error1 != null)
+								out.println(
+								"<div style='color: white; text-align: center; background-color: #ff32539c; border-radius: 20px; backdrop-filter: blur(8px); font-size: 30px; padding: 0 10; margin-bottom: 15;'>"
+										+ "Wrong username or password!" + "</div>");
+							%>
 							<div class="form-group">
 								<input type="text" name="username" placeholder="Enter Username"
-									class="form-control" required>
+									class="form-control" required
+									style="backdrop-filter: blur(0px);">
 							</div>
 							<div class="form-group">
 								<input type="password" name="password"
-									placeholder="Enter Password" class="form-control" required>
+									placeholder="Enter Password" class="form-control" required
+									style="backdrop-filter: blur(0px);">
 							</div>
 
 							<div class="form-group">
