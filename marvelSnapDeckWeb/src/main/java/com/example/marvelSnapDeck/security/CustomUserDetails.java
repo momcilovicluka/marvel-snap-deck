@@ -34,34 +34,34 @@ public class CustomUserDetails implements UserDetails {
 	}
 
 	@Override
-	public String getPassword() { // TODO Auto-generated method stub
-		if(user == null)
+	public String getPassword() {
+		if (user == null)
 			return null;
 		return user.getPassword();
 	}
 
 	@Override
-	public String getUsername() { // TODO Auto-generated method stub
+	public String getUsername() {
 		return user.getUsername();
 	}
 
 	@Override
-	public boolean isAccountNonExpired() { // TODO Auto-generated
+	public boolean isAccountNonExpired() {
 		return true;
 	}
 
 	@Override
-	public boolean isAccountNonLocked() { // TODO Auto-generated method
+	public boolean isAccountNonLocked() {
 		return true;
 	}
 
 	@Override
-	public boolean isCredentialsNonExpired() { // TODO Auto-generated
+	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
 	@Override
-	public boolean isEnabled() { // TODO Auto-generated method stub
+	public boolean isEnabled() {
 		return true;
 	}
 }
