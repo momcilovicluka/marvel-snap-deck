@@ -17,3 +17,9 @@ A comprehensive Spring Boot-based Java web application built from the ground up,
 •	Utilized version control with Git for streamlined management of code modifications
 
 •	Incorporated industry-standard security measures, such as Spring security framework, to ensure secure authentication of users and safeguarding of sensitive data
+
+# 🚀Running localy
+Just clone the repo and then run:
+```powershell
+docker compose up
+```
