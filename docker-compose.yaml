@@ -7,11 +7,11 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: marvelsnapdeck
+      MYSQL_DATABASE: marvelSnapDeck
     ports:
       - "3306:3306"
     volumes:
-      - ./Database/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./../Database/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
