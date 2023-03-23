@@ -10,8 +10,6 @@ services:
       MYSQL_DATABASE: marvelSnapDeck
     ports:
       - "3306:3306"
-    volumes:
-      - ./../Database/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -26,7 +24,6 @@ services:
       - "8082:80"
     depends_on:
       - db
-
   marvel-snap-deck:
     image: momcilovicluka/marvel-snap-deck
     container_name: marvel-snap-deck
