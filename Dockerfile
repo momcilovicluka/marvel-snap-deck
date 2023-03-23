@@ -5,9 +5,11 @@ EXPOSE 8080
 # add everything in the current directory to the image
 ADD . .
 
+COPY . .
+
 WORKDIR /marvelSnapDeckWeb
 
-CMD [ "/bin/ls", "-alt" ]
+CMD [ "ls", "-alt" ]
 
 ENTRYPOINT [ "java", "-jar", "target/marvelSnapDeckWeb-0.0.1-SNAPSHOT.jar" ]
 
