@@ -42,7 +42,11 @@ Make sure you have the following installed:
 
 1. Clone the repository to your local machine:
 ```
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/momcilovicluka/marvelSnapDeck.git
+```
+or
+```
+gh clone momcilovicluka/marvelSnapDeck
 ```
 2. Open a terminal and navigate to the project directory.
 
