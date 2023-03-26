@@ -65,6 +65,8 @@ This command may take several minutes to complete.
 
 6. Select `dump.sql` from the `Database` directory in the root of the project, then click `import` at the bottom of the page.
 
-7. Once the import is complete, open your web browser and navigate to `localhost:8080` to access the application.
+7. Once the import is complete, open your web browser and navigate to `localhost:8080/marvelSnapDeck/` to access the application.
+
+8. You may need to stop the containers and run 'docker compose up' again
 
 🎉 Congratulations! You have successfully installed and set up the application locally. Enjoy!
