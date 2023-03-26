@@ -1,5 +1,4 @@
-version: '3.7'
-
+version: "3.7"
 services:
   db:
     image: mysql:latest
@@ -8,9 +7,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: marvelSnapDeck
+      MAX_ALLOWED_PACKET: 1024M
     ports:
       - "3306:3306"
-    
+    networks:
+      - marvelSnapDeckNetwork
+    volumes:
+      - ./Database/my.cnf:/etc/mysql/my.cnf
+      - ./Database/dump.sql:/docker-entrypoint-initdb.d/init.sql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -19,11 +23,13 @@ services:
       UPLOAD_LIMIT: 100M
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/marvelSnapDeck
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
+      SPRING_DATASOURCE_PASSWORD: root
     ports:
       - "8082:80"
     depends_on:
       - db
+    networks:
+      - marvelSnapDeckNetwork
   marvel-snap-deck:
     image: momcilovicluka/marvel-snap-deck
     container_name: marvel-snap-deck
@@ -40,3 +46,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    networks:
+      - marvelSnapDeckNetwork
+networks:
+  marvelSnapDeckNetwork:
